@@ -1,13 +1,14 @@
-$camera-width: 75px;
+$camera-size: 75px;
 
 .camera {
   margin: $space-big 0;
-  input, label {
+  #camera, label {
     margin: 0 auto;
     display:block;
   }
-  input {
-    width: $camera-width;
+  #camera {
+    width: $camera-size;
+    height: $camera-size;
   }
   label {
     text-align: center;

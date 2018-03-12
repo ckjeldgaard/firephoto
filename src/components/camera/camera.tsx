@@ -38,7 +38,7 @@ export default class Camera extends React.Component {
 
     render(): ReactNode {
         return <div className='camera'>
-            <input id='camera' type='image' src='../../assets/img/camera.png' onClick={this.onCameraClick} />
+            <button id='camera' onClick={this.onCameraClick} />
             <label htmlFor='camera'>Click the camera icon!</label>
             <video autoPlay ref={(vid) => {this.video = vid; }} />
             <img src='' />

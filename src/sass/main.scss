@@ -8,3 +8,7 @@ $accent: $nephritis !default;
 @import '../components/header/header';
 @import '../components/content-area/content-area';
 @import '../components/camera/camera';
+
+#camera {
+  background-image: url('../assets/img/camera.png');
+}
