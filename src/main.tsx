@@ -4,9 +4,9 @@ import FirePhotoApp from './components/firephoto-app';
 
 require('./sass/main.scss');
 
-if ('serviceWorker' in navigator) {
+/* if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js');
-}
+} */
 
 ReactDOM.render(
     <FirePhotoApp />,
