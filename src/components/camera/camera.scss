@@ -1,0 +1,22 @@
+$camera-width: 75px;
+
+.camera {
+  margin: $space-big 0;
+  input, label {
+    margin: 0 auto;
+    display:block;
+  }
+  input {
+    width: $camera-width;
+  }
+  label {
+    text-align: center;
+    font-size: $font-big;
+    font-weight: bold;
+    width: 300px;
+    margin-bottom: $space-small;
+  }
+  video {
+    width: 100%;
+  }
+}
