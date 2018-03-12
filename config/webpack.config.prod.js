@@ -115,7 +115,7 @@ webpackConfig.plugins = [...webpackConfig.plugins,
     'process.env': env
   }),
   new SWPrecacheWebpackPlugin({
-    cacheId: 'repmax-app',
+    cacheId: 'firephoto-app',
     filename: 'service-worker.js',
     maximumFileSizeToCacheInBytes: 3000000,
     staticFileGlobs: ['dist/**/*.{js,html,css}'],
