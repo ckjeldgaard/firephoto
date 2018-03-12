@@ -2,6 +2,7 @@
   "name": "firephoto",
   "version": "0.0.1",
   "description": "An experimental progressive web app exploring uploading camera images to Firebase.",
+  "homepage": "https://ckjeldgaard.github.io/firephoto/",
   "main": "index.ts",
   "scripts": {
     "build": "cross-env NODE_ENV=production npm run clean && npm run compile",
