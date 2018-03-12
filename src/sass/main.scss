@@ -1,0 +1,9 @@
+@import 'imports/styles';
+
+// Colors
+$primary: $orange !default;
+$secondary: lighten($turqoise, 10%) !default;
+$accent: $nephritis !default;
+
+@import '../components/header/header';
+@import '../components/content-area/content-area';

@@ -1,0 +1,29 @@
+header {
+  background-color: $primary;
+  color: $black;
+  padding: $space-small $space-med;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  h1 {
+    color: $black;
+    font-size: $font-big;
+    font-weight: bold;
+    margin: 0;
+    flex-grow: 2;
+  }
+  .icon {
+    width: 25px;
+    height: 25px;
+    display: block;
+    background-repeat: no-repeat;
+  }
+  .back,
+  .about {
+    background-color: $black;
+    mask-repeat: no-repeat;
+  }
+  .back {
+    margin-right: $space-small;
+  }
+}

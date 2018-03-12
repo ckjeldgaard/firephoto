@@ -1,0 +1,7 @@
+.idea/
+node_modules/
+dist/
+reports/
+coverage/
+npm-debug.log
+src/**/*.d.ts
