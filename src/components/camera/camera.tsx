@@ -56,9 +56,9 @@ export default class Camera extends React.Component<CameraProps, CameraState> {
         this._canvas.getContext('2d').drawImage(this._video, 0, 0);
 
         const storageRef = this.props.storage.ref();
-        const photosRef = storageRef.child('photos');
+        const photosRef = storageRef.child('photos/samle.png');
         // const message = 'data:text/plain;base64,5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
-        const message = this._canvas.toDataURL('image/webp');
+        const message = this._canvas.toDataURL('image/png');
         photosRef.putString(message, 'data_url').then((snapshot) => {
             console.log('Uploaded a data_url string!', snapshot);
         }).catch(reason => {

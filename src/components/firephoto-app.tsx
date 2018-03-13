@@ -2,9 +2,10 @@ import * as React from 'react';
 import {ReactNode} from 'react';
 import Header from './header/header';
 import ContentArea from './content-area/content-area';
+import {Route} from 'react-router';
 
 export interface FirePhotoAppProps {
-    storage: firebase.storage.Storage;
+    firebase: firebase.app.App;
 }
 
 export default class FirePhotoApp extends React.Component<FirePhotoAppProps> {
@@ -13,8 +14,12 @@ export default class FirePhotoApp extends React.Component<FirePhotoAppProps> {
 
     render(): ReactNode {
         return <div>
-            <Header title={FirePhotoApp.TITLE} />
-            <ContentArea storage={this.props.storage} />
+            <Route render={(props) => {
+                return (
+                    <Header title={FirePhotoApp.TITLE} />
+                );
+            }} />
+            <ContentArea firebase={this.props.firebase} />
         </div>;
     }
 }
