@@ -20,4 +20,20 @@ $camera-size: 75px;
   video {
     width: 100%;
   }
+  #capture-button {
+    background: $black;
+    color: $off-white;
+    border-radius: $space-tiny;
+    border: 0;
+    padding: $space-small $space-med;
+    font-size: $font-big;
+    margin: $space-small auto;
+    display: none;
+  }
+  .display {
+    display: block !important;
+  }
+  canvas {
+    width: 100%;
+  }
 }
