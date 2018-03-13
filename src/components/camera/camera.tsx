@@ -1,7 +1,9 @@
 import * as React from 'react';
 import {ReactNode} from 'react';
 
-export interface CameraProps {}
+export interface CameraProps {
+    storage: firebase.storage.Storage;
+}
 export interface CameraState {
     displayBtn: boolean;
 }
@@ -18,6 +20,8 @@ export default class Camera extends React.Component<CameraProps, CameraState> {
         this.onCameraClick = this.onCameraClick.bind(this);
         this.onUpload = this.onUpload.bind(this);
         this.handleSuccess = this.handleSuccess.bind(this);
+
+        console.log('storage = ', this.props.storage);
     }
 
     private handleSuccess(stream: MediaStream): void {
@@ -50,6 +54,16 @@ export default class Camera extends React.Component<CameraProps, CameraState> {
         this._canvas.width = this._video.videoWidth;
         this._canvas.height = this._video.videoHeight;
         this._canvas.getContext('2d').drawImage(this._video, 0, 0);
+
+        const storageRef = this.props.storage.ref();
+        const photosRef = storageRef.child('photos');
+        // const message = 'data:text/plain;base64,5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
+        const message = this._canvas.toDataURL('image/webp');
+        photosRef.putString(message, 'data_url').then((snapshot) => {
+            console.log('Uploaded a data_url string!', snapshot);
+        }).catch(reason => {
+            console.error('Couldnt upload image', reason);
+        });
 
     }
 

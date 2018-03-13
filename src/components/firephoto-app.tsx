@@ -3,14 +3,18 @@ import {ReactNode} from 'react';
 import Header from './header/header';
 import ContentArea from './content-area/content-area';
 
-export default class FirePhotoApp extends React.Component {
+export interface FirePhotoAppProps {
+    storage: firebase.storage.Storage;
+}
+
+export default class FirePhotoApp extends React.Component<FirePhotoAppProps> {
 
     public static readonly TITLE: string = 'FirePhoto';
 
     render(): ReactNode {
         return <div>
             <Header title={FirePhotoApp.TITLE} />
-            <ContentArea/>
+            <ContentArea storage={this.props.storage} />
         </div>;
     }
 }
