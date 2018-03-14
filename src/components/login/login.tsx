@@ -1,51 +1,66 @@
 import * as React from 'react';
 import {ReactNode} from 'react';
-import * as Firebase from 'firebase';
-let firebaseui = require('firebaseui');
 
 export interface LoginProps {
     firebase: firebase.app.App;
 }
 
-export default class Login extends React.Component<LoginProps> {
+export interface LoginState {
+    email: string;
+    password: string;
+}
+
+export default class Login extends React.Component<LoginProps, LoginState> {
 
     constructor(props: LoginProps) {
         super(props);
 
-        const ui = new firebaseui.auth.AuthUI(this.props.firebase.auth());
-
-        const uiConfig = {
-            callbacks: {
-                signInSuccess: (currentUser: any, credential: any, redirectUrl: any) => {
-                    // User successfully signed in.
-                    // Return type determines whether we continue the redirect automatically
-                    // or whether we leave that to developer to handle.
-                    return true;
-                },
-                uiShown: () => {
-                    // The widget is rendered.
-                    // Hide the loader.
-                    // document.getElementById('loader').style.display = 'none';
-                }
-            },
-            // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-            signInFlow: 'popup',
-            signInSuccessUrl: '#/camera',
-            signInOptions: [
-                Firebase.auth.EmailAuthProvider.PROVIDER_ID
-            ],
-            // Terms of service url.
-            tosUrl: '<your-tos-url>'
+        this.state = {
+            email: '',
+            password: ''
         };
 
+        this.onSignInClick = this.onSignInClick.bind(this);
+    }
 
-        ui.start('#firebaseui-auth-container', uiConfig);
+    private onSignInClick(event: any): void {
+        console.log('onSignInClick', this.state.email);
+        console.log('onSignInClick', this.state.password);
+
+        this.props.firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+            .then((c) => {
+                console.log('Logged in = ', c);
+                window.location.replace('/#/camera');
+            })
+            .catch((error) => {
+                console.error('Error = ', error);
+            });
+    }
+
+    private updateEmail(evt: any): void {
+        this.setState({
+            email: evt.target.value
+        });
+    }
+
+    private updatePwd(evt: any): void {
+        this.setState({
+            password: evt.target.value
+        });
     }
 
     render(): ReactNode {
-        return <div>
+        return <div className='login'>
             <h1>Login</h1>
-            <div id='firebaseui-auth-container' />
+                <div>
+                    <label htmlFor='email'>Email</label>
+                    <input type='email' name='email' placeholder='Email' required={true} value={this.state.email} onChange={evt => this.updateEmail(evt)} />
+                </div>
+                <div>
+                    <label htmlFor='password'>Password</label>
+                    <input type='password' name='password' placeholder='Password' required={true} value={this.state.password} onChange={evt => this.updatePwd(evt)} />
+                </div>
+                <button className='btn--raised btn--accent' onClick={this.onSignInClick}>Sign in</button>
         </div>;
     }
 }

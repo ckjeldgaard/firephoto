@@ -1,9 +1,13 @@
+$primary: #ff6600;
+$secondary: lighten(#1abc9c, 10%) !default;
+$accent: #212121 !default;
+
 @import 'imports/styles';
 
 // Colors
 $primary: $orange !default;
 $secondary: lighten($turqoise, 10%) !default;
-$accent: $nephritis !default;
+$accent: $black !default;
 
 @import '../components/header/header';
 @import '../components/content-area/content-area';
