@@ -4,6 +4,9 @@ import * as Firebase from 'firebase';
 import FirePhotoApp from './components/firephoto-app';
 import { HashRouter } from 'react-router-dom';
 
+// Required for side-effects
+require('firebase/firestore');
+
 require('./sass/main.scss');
 
 if ('serviceWorker' in navigator) {
