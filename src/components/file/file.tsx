@@ -95,7 +95,7 @@ export default class File extends React.Component<FileProps, FileState> {
 
     render(): ReactNode {
         return <div className='file'>
-            <input type='file' accept='image/*' id='capture' className='captureInput' capture={true} ref={(f) => {this._fileField = f; }} onChange={this.onFileChosen} />
+            <input type='file' accept='image/*' id='capture' className='captureInput' ref={(f) => {this._fileField = f; }} onChange={this.onFileChosen} />
             <label htmlFor='capture' id='capture-label' />
             <img ref={(p) => {this._previewField = p; }} />
             <button className={this.state.displayUpload ? 'btn--raised btn--accent display' : 'btn--raised btn--accent'} onClick={this.onUpload}>Upload</button>
