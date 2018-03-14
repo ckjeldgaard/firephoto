@@ -30,7 +30,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
         this.props.firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
             .then((c) => {
                 console.log('Logged in = ', c);
-                window.location.replace('/#/camera');
+                window.location.replace('/#/file');
             })
             .catch((error) => {
                 console.error('Error = ', error);
