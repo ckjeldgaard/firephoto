@@ -13,7 +13,8 @@ $accent: $black !default;
 @import '../components/content-area/content-area';
 @import '../components/camera/camera';
 @import '../components/login/login';
+@import '../components/file/file';
 
-#camera {
+#camera, #capture-label {
   background-image: url('../assets/img/camera.png');
 }

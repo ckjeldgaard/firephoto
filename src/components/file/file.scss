@@ -1,0 +1,32 @@
+.file {
+  .captureInput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  label {
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin: 20px auto;
+  }
+  button {
+    margin: 10px auto;
+    display: none;
+  }
+  img {
+    width: 100%;
+  }
+  .display {
+    display: block !important;
+  }
+  p {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: $font-med;
+  }
+}
