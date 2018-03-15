@@ -1,0 +1,47 @@
+$snackbar-width: 350px;
+$snackbar-bottom-distance: 30px;
+
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: $snackbar-width;
+  margin-left: -($snackbar-width / 2);
+  background-color: $black;
+  color: $off-white;
+  text-align: center;
+  border-radius: 4px;
+  padding: $space-small;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: $snackbar-bottom-distance;
+}
+
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: $snackbar-bottom-distance; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: $snackbar-bottom-distance; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: $snackbar-bottom-distance; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: $snackbar-bottom-distance; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}

@@ -3,6 +3,7 @@ import {ReactNode} from 'react';
 import UploadTaskSnapshot = firebase.storage.UploadTaskSnapshot;
 import {Upload} from '../../model/upload';
 import {AppUser} from '../../model/appuser';
+import Snackbar from '../snackbar/snackbar';
 
 const uuidv1 = require('uuid/v1');
 
@@ -12,6 +13,8 @@ export interface FileProps {
 export interface FileState {
     displayUpload: boolean;
     uploadResult: string;
+    errorVisible: boolean;
+    errorMsg: string;
 }
 
 export default class File extends React.Component<FileProps, FileState> {
@@ -25,7 +28,9 @@ export default class File extends React.Component<FileProps, FileState> {
         super(props);
         this.state = {
             displayUpload: false,
-            uploadResult: ''
+            uploadResult: '',
+            errorVisible: false,
+            errorMsg: ''
         };
         this.onFileChosen = this.onFileChosen.bind(this);
         this.onUpload = this.onUpload.bind(this);
@@ -55,22 +60,23 @@ export default class File extends React.Component<FileProps, FileState> {
             const photosRef = storageRef.child('photos/' + uuidv1() + '.jpg');
 
             photosRef.putString((ev.target as FileReader).result, 'data_url').then((snapshot: UploadTaskSnapshot) => {
-                console.log('Uploaded a data_url string!', snapshot);
 
                 const upload = new Upload(
                     snapshot.metadata.downloadURLs[0],
                     this.currentUser.getUid(),
                     this.currentUser.getEmail()
                 );
-                console.log('user', this.currentUser);
-                console.log('upload', upload);
 
                 this.writeUploadToDatabase(upload);
 
                 this.setState({uploadResult: 'Image successfully uploaded!'});
             }).catch(reason => {
-                console.error('Couldnt upload image', reason);
-                this.setState({uploadResult: 'Upload failed'});
+                console.error('Upload failed', reason);
+                this.setState({
+                    uploadResult: 'Upload failed',
+                    errorVisible: true,
+                    errorMsg: reason.message
+                });
             });
 
         };
@@ -87,6 +93,10 @@ export default class File extends React.Component<FileProps, FileState> {
             })
             .catch((error) => {
                 console.error('Error writing document: ', error);
+                this.setState({
+                    errorVisible: true,
+                    errorMsg: error.toString()
+                });
             });
         db.collection('user-uploads').doc(upload.getUid())
             .set(upload.toObject());
@@ -100,6 +110,7 @@ export default class File extends React.Component<FileProps, FileState> {
             <img ref={(p) => {this._previewField = p; }} />
             <button className={this.state.displayUpload ? 'btn--raised btn--accent display' : 'btn--raised btn--accent'} onClick={this.onUpload}>Upload</button>
             <p>{this.state.uploadResult}</p>
+            <Snackbar visible={this.state.errorVisible} message={this.state.errorMsg} />
         </div>;
     }
 

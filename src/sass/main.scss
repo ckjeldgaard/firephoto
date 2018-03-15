@@ -14,6 +14,7 @@ $accent: $black !default;
 @import '../components/camera/camera';
 @import '../components/login/login';
 @import '../components/file/file';
+@import '../components/snackbar/snackbar';
 
 #camera, #capture-label {
   background-image: url('../assets/img/camera.png');

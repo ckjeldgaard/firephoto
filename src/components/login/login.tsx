@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {ReactNode} from 'react';
+import Snackbar from '../snackbar/snackbar';
 
 export interface LoginProps {
     firebase: firebase.app.App;
@@ -8,6 +9,8 @@ export interface LoginProps {
 export interface LoginState {
     email: string;
     password: string;
+    errorVisible: boolean;
+    errorMsg: string;
 }
 
 export default class Login extends React.Component<LoginProps, LoginState> {
@@ -17,7 +20,9 @@ export default class Login extends React.Component<LoginProps, LoginState> {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            errorVisible: false,
+            errorMsg: ''
         };
 
         this.onSignInClick = this.onSignInClick.bind(this);
@@ -34,6 +39,10 @@ export default class Login extends React.Component<LoginProps, LoginState> {
             })
             .catch((error) => {
                 console.error('Error = ', error);
+                this.setState({
+                    errorVisible: true,
+                    errorMsg: 'Login failed!'
+                });
             });
     }
 
@@ -61,6 +70,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                     <input type='password' name='password' placeholder='Password' required={true} value={this.state.password} onChange={evt => this.updatePwd(evt)} />
                 </div>
                 <button className='btn--raised btn--accent' onClick={this.onSignInClick}>Sign in</button>
+            <Snackbar visible={this.state.errorVisible} message={this.state.errorMsg} />
         </div>;
     }
 }
